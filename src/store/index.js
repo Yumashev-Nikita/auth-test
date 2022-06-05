@@ -1,14 +1,9 @@
 import { createStore } from 'vuex';
 
+import NAVBAR from './modules/navbar';
+
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    navbar: NAVBAR,
   },
 });

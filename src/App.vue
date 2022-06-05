@@ -1,26 +1,25 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template lang='pug'>
+.main-container
+  EntryPoint
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import EntryPoint from './components/EntryPoint.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    EntryPoint,
   },
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped lang="sass">
+.main-container
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: white
 </style>
