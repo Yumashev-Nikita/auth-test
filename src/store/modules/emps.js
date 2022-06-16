@@ -1,10 +1,11 @@
 export default {
   namespaced: true,
   state: {
-    navPoint: 1,
+    dept: 0,
+    pos: 0,
+    page: 5,
   },
   getters: {
-    getNavPoint: (state) => state.navPoint,
   },
   mutations: {
   },

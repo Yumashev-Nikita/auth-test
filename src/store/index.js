@@ -1,9 +1,9 @@
 import { createStore } from 'vuex';
 
-import NAVBAR from './modules/navbar';
+import EMPS from './modules/emps';
 
 export default createStore({
   modules: {
-    navbar: NAVBAR,
+    emps: EMPS,
   },
 });

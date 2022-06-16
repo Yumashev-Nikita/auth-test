@@ -1,7 +1,8 @@
 <template lang='pug'>
 .top-nav-bar
   .top-nav-bar__block-container
-    router-link(to='/profile' class='top-nav-bar__block nav-bar-block-text rl-ns') Профиль
+    router-link(to='/profile' class='top-nav-bar__block nav-bar-block-text rl-ns'
+    @click='test_click') Профиль
     router-link(to='/emps' class='top-nav-bar__block nav-bar-block-text rl-ns') Сотрудники
     router-link(to='/auth' class='top-nav-bar__block nav-bar-block-text rl-ns') Авторизация
 <router-view></router-view>
@@ -10,33 +11,14 @@
 <script>
 /* eslint-disable prefer-template */
 
-import { computed } from 'vue';
-import { useStore } from 'vuex';
+import auth from '../api/auth';
 // 6pYIYy5wCN
 export default {
   name: 'EntryPoint',
-  setup() {
-    const store = useStore();
-    return {
-      getNavPoint: computed(() => store.getters['navbar/getNavPoint']),
-    };
-  },
   methods: {
     test_click: (async () => {
-      const res = await fetch('https://test.atwinta.online/api/v1/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: 'libradrago79@gmail.com',
-          password: '6pYIYy5wCN',
-        }),
-      });
-      const data = await res.json();
-      console.log(await data);
-      const token = await data.token;
-      console.log(token);
+      const token = await auth.getToken();
+      console.log(await token);
       const department = await fetch('https://test.atwinta.online/api/v1/departments', {
         method: 'GET',
         headers: {
