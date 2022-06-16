@@ -3,11 +3,15 @@ export default {
   state: {
     dept: 0,
     pos: 0,
-    page: 5,
+    page: 6,
   },
   getters: {
   },
   mutations: {
+    LIST_PAGE: (state) => {
+      console.log('list');
+      state.page += 1;
+    },
   },
   actions: {
   },

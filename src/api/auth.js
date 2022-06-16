@@ -1,5 +1,3 @@
-// import auth from '../auth/auth';
-
 export default {
   async getToken() {
     console.log('getToken');
