@@ -34,6 +34,7 @@ export default {
         }),
       });
       const data = await res.json();
+      console.log(await data);
       const token = await data.token;
       console.log(token);
       const department = await fetch('https://test.atwinta.online/api/v1/departments', {

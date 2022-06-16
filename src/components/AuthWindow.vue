@@ -3,12 +3,40 @@
   .auth-window__label.signIn-text Войти
   .auth-window__input-container
     span(class='input-bar-text') Логин
-    textarea(class='auth-window__login input-bar-text' placeholder='Ваш логин'
-    v-model='name')
+    input(class='auth-window__login input-bar-text' placeholder='...'
+    v-model='login')
   .auth-window__input-container
     span(class='input-bar-text') Пароль
-    textarea(class='auth-window__password input-bar-text' placeholder='Ваш пароль'
+    input(class='auth-window__password input-bar-text' type='password' placeholder='...'
     v-model='password')
+  .auth-window__input-container
+    span(class='input-bar-text') Имя
+    input(class='auth-window__password input-bar-text' placeholder='...'
+    v-model='name')
+  .auth-window__input-container
+    span(class='input-bar-text') Почта
+    input(class='auth-window__password input-bar-text' placeholder='...'
+    v-model='email')
+  .auth-window__input-container
+    span(class='input-bar-text') Специальность
+    input(class='auth-window__password input-bar-text' placeholder='...'
+    v-model='type')
+  .auth-window__input-container
+    span(class='input-bar-text') Github
+    input(class='auth-window__password input-bar-text' placeholder='...'
+    v-model='github')
+  .auth-window__input-container
+    span(class='input-bar-text') Город
+    input(class='auth-window__password input-bar-text' placeholder='...'
+    v-model='city')
+  .auth-window__input-container
+    span(class='input-bar-text') Телефон
+    input(class='auth-window__password input-bar-text' placeholder='...'
+    v-model='phone')
+  .auth-window__input-container
+    span(class='input-bar-text') День рождения
+    input(class='auth-window__password input-bar-text' placeholder='...'
+    v-model='birthday')
   span(class='commit-text' @click='sendAuth') Подтвердить
 </template>
 
@@ -17,15 +45,15 @@ export default {
   name: 'AuthWindow',
   data() {
     return {
-      password: '',
-      login: '',
-      name: '',
-      email: '',
-      type: '',
-      github: '',
-      city: '',
-      phone: '',
-      birthday: '',
+      password: null,
+      login: null,
+      name: null,
+      email: null,
+      type: null,
+      github: null,
+      city: null,
+      phone: null,
+      birthday: null,
     };
   },
   methods: {
@@ -37,12 +65,12 @@ export default {
         },
         body: JSON.stringify({
           name: this.name,
-          email: 'umashev58@gmail.com',
-          type: 'front',
-          github: 'https://github.com/Yumashev-Nikita',
-          city: 'Кемерово',
-          phone: '9964150932',
-          birthday: '05.06.2001',
+          email: this.email,
+          type: this.type,
+          github: this.github,
+          city: this.city,
+          phone: this.phone,
+          birthday: this.birthday,
         }),
       });
       console.log(res.body);
