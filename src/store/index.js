@@ -1,9 +1,9 @@
 import { createStore } from 'vuex';
 
-import EMPS from './modules/emps';
+import EMPLOYEES from './modules/employees';
 
 export default createStore({
   modules: {
-    emps: EMPS,
+    employees: EMPLOYEES,
   },
 });

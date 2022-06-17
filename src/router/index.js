@@ -5,7 +5,7 @@ import AuthWindow from '../components/AuthWindow.vue';
 
 const routes = [
   { path: '/profile', component: ProfileWindow },
-  { path: '/emps', component: EmpsWindow },
+  { path: '/employees', component: EmpsWindow },
   { path: '/auth', component: AuthWindow },
 ];
 

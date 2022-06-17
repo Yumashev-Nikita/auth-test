@@ -2,12 +2,10 @@
 .emp
   img(:src='image')
   span() {{ name }}
-  router-link(:to='link') Открыть профиль
+  //- router-link(:to='link') Открыть профиль
 </template>
 
 <script>
-/* eslint-disable prefer-template */
-
 export default {
   name: 'EmpCard',
   props: {
@@ -17,7 +15,7 @@ export default {
   },
   data() {
     return {
-      link: '/emps/' + this.id,
+      link: `/emp/${this.id}`,
     };
   },
 };

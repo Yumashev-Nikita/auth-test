@@ -3,8 +3,9 @@ import auth from './auth';
 const axios = require('axios').default;
 
 export default {
-  async getEmps(page) {
-    let empsData;
+  async getEmployees(page) {
+    let employeesData;
+    console.log('getEmps');
     await axios({
       method: 'GET',
       url: `https://test.atwinta.online/api/v1/workers?page=${page}`,
@@ -12,16 +13,16 @@ export default {
         Authorization: `Bearer ${await auth.getToken()}`,
       },
     }).then((response) => {
-      console.log('emps: ', response.data);
-      empsData = response.data.data;
+      console.log('employees: ', response.data);
+      employeesData = response.data.data;
     }).catch((error) => {
-      console.log('ERROR: GET_EMPS', error);
+      console.log('ERROR: GET_employeeS', error);
     });
-    return empsData;
+    return employeesData;
   },
-  async getEmpById(id) {
-    console.log(`Get emp by id: ${id}`);
-    let emp;
+  async getemployeeById(id) {
+    console.log(`Get employee by id: ${id}`);
+    let employee;
     await axios({
       method: 'GET',
       url: `https://test.atwinta.online/api/v1/workers/${id}`,
@@ -29,12 +30,12 @@ export default {
         Authorization: `Bearer ${await auth.getToken()}`,
       },
     }).then((response) => {
-      console.log('emp by id: ', response.data);
-      emp = response.data;
+      console.log('employee by id: ', response.data);
+      employee = response.data;
     }).catch((error) => {
-      console.log('ERROR: GET_EMPS', error);
+      console.log('ERROR: GET_employeeS', error);
     });
-    return emp;
+    return employee;
   },
   async getPageAmount() {
     const token = await auth.getToken();
@@ -45,8 +46,8 @@ export default {
         'Content-Type': 'application/json',
       },
     });
-    const empList = await res.json();
-    const pageAmount = await empList.last_page;
+    const employeeList = await res.json();
+    const pageAmount = await employeeList.last_page;
     return pageAmount;
   },
 };

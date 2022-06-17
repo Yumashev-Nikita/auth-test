@@ -1,6 +1,7 @@
 <template lang="pug">
 .page-list
-  span(class='page-number page-number-text' v-for='page in pages' :key='page'
+  span(v-for='page in pages' :key='page'
+  class='page-number page-number-text'
   @click='setPage(page)') {{ page }}
 .emps
   EmpCard(v-for='emp in emps' :key='emp.id' :image='emp.image' :name='emp.name' :id='emp.id')
@@ -16,26 +17,14 @@ export default {
   components: {
     EmpCard,
   },
-  data() {
-    return {
-      pos_id: '',
-      dept_id: '',
-      emps: {},
-      pages: 1,
-    };
-  },
-  async mounted() {
-    const store = useStore();
-    this.emps = await store.getters['emps/getEmps'];
-    this.pages = await store.getters['emps/getPageAmount'];
-    return {
-    };
-  },
   setup() {
     const store = useStore();
+    store.dispatch('preFetchEmployees');
+    store.dispatch('preFetchPages');
     return {
-      setPage: (page) => store.commit('emps/SET_PAGE', page),
-      page: computed(() => store.getters['emps/getPage']),
+      setPage: (page) => store.dispatch('setPage', page),
+      emps: computed(() => store.state.employees.employees),
+      pages: computed(() => store.state.employees.pages),
     };
   },
 };
@@ -43,13 +32,6 @@ export default {
 
 <style lang="sass" scoped>
 @use './style/_textpresets'
-.test
-  width: 20px
-  height: 20px
-  border: 1px solid
-  color: black
-  margin-top: 100px
-  z-index: 2
 .emps
   display: flex
   flex-wrap: wrap
