@@ -2,7 +2,7 @@
 .emp
   img(:src='image')
   span() {{ name }}
-  //- router-link(:to='link') Открыть профиль
+  router-link(to='/employee') Открыть профиль
 </template>
 
 <script>
@@ -12,11 +12,6 @@ export default {
     image: String,
     name: String,
     id: Number,
-  },
-  data() {
-    return {
-      link: `/emp/${this.id}`,
-    };
   },
 };
 </script>

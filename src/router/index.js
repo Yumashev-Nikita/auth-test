@@ -1,12 +1,14 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import ProfileWindow from '../components/ProfileWindow.vue';
-import EmpsWindow from '../components/EmpsWindow.vue';
+import EmployeesWindow from '../components/EmployeesWindow.vue';
+import EmployeeWindow from '../components/EmployeeWindow.vue';
 import AuthWindow from '../components/AuthWindow.vue';
 
 const routes = [
   { path: '/profile', component: ProfileWindow },
-  { path: '/employees', component: EmpsWindow },
+  { path: '/employees', component: EmployeesWindow },
   { path: '/auth', component: AuthWindow },
+  { path: '/employee', component: EmployeeWindow },
 ];
 
 const router = createRouter({

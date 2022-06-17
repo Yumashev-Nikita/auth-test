@@ -1,21 +1,24 @@
 <template lang="pug">
-.page-list
-  span(v-for='page in pages' :key='page'
-  class='page-number page-number-text'
-  @click='setPage(page)') {{ page }}
-.emps
-  EmpCard(v-for='emp in emps' :key='emp.id' :image='emp.image' :name='emp.name' :id='emp.id')
+.emps-window-container
+  .page-list
+    span(class='arrow') &lt
+    span(v-for='page in pages' :key='page'
+    class='page-number page-number-text'
+    @click='setPage(page)') {{ page }}
+    span(class='arrow') >
+  .emps
+    EmployeeCard(v-for='emp in emps' :key='emp.id' :image='emp.image' :name='emp.name' :id='emp.id')
 </template>
 
 <script>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import EmpCard from './EmpCard.vue';
+import EmployeeCard from './EmployeeCard.vue';
 
 export default {
   name: 'EmpsWindow',
   components: {
-    EmpCard,
+    EmployeeCard,
   },
   setup() {
     const store = useStore();
@@ -32,19 +35,29 @@ export default {
 
 <style lang="sass" scoped>
 @use './style/_textpresets'
+.emps-window-container
+  width: 1060px
+  margin: 100px auto
 .emps
   display: flex
   flex-wrap: wrap
-  justify-content: center
   flex-direction: row
-  width: 1060px
-  margin: 100px auto
 .page-list
   margin: 60px 0
 .page-number
   margin: 10px 5px
 .page-number-text
   @extend %maintypo
-  @extend %h2semibold
+  @extend %h1semibold
   color: black
+  cursor: pointer
+  &:hover
+    color: gray
+.arrow
+  @extend %maintypo
+  @extend %h1semibold
+  color: black
+  cursor: pointer
+  &:hover
+    color: gray
 </style>

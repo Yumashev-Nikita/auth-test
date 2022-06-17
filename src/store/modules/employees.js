@@ -10,9 +10,9 @@ export default {
     employees: {},
   },
   getters: {
-    getEmployees: (state) => state.employees,
-    getPageAmount: (state) => state.pages,
-    getPage: (state) => state.page,
+    getEmployees: (state) => state.employees.data,
+    getPageAmount: (state) => state.employees.last_page,
+    getPage: (state) => state.employees.current_page,
   },
   mutations: {
     LIST_PAGE_FORWARD: (state) => { state.page += 1; },

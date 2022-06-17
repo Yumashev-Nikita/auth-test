@@ -1,4 +1,5 @@
 import auth from './auth';
+import baseURL from './base-vars';
 
 const axios = require('axios').default;
 
@@ -8,7 +9,7 @@ export default {
     console.log('getEmps');
     await axios({
       method: 'GET',
-      url: `https://test.atwinta.online/api/v1/workers?page=${page}`,
+      url: `${baseURL}/workers?page=${page}`,
       headers: {
         Authorization: `Bearer ${await auth.getToken()}`,
       },
@@ -20,12 +21,12 @@ export default {
     });
     return employeesData;
   },
-  async getemployeeById(id) {
+  async getEmployeeById(id) {
     console.log(`Get employee by id: ${id}`);
     let employee;
     await axios({
       method: 'GET',
-      url: `https://test.atwinta.online/api/v1/workers/${id}`,
+      url: `${baseURL}/workers/${id}`,
       headers: {
         Authorization: `Bearer ${await auth.getToken()}`,
       },
@@ -39,7 +40,7 @@ export default {
   },
   async getPageAmount() {
     const token = await auth.getToken();
-    const res = await fetch('https://test.atwinta.online/api/v1/workers', {
+    const res = await fetch(`${baseURL}/workers`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
