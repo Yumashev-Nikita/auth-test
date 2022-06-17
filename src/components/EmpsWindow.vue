@@ -1,60 +1,48 @@
 <template lang="pug">
-div(class='test' @click='change_page') press
-router-link(class='test' :to="{ name: 'emps', params: { page: 8 }}") press
+.page-list
+  span(class='page-number page-number-text' v-for='page in pages' :key='page'
+  @click='setPage(page)') {{ page }}
 .emps
   EmpCard(v-for='emp in emps' :key='emp.id' :image='emp.image' :name='emp.name' :id='emp.id')
 </template>
 
 <script>
-/* eslint-disable prefer-template */
-/* eslint-disable prefer-destructuring */
-
-// import { computed } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import EmpCard from './EmpCard.vue';
-import auth from '../api/auth';
 
 export default {
   name: 'EmpsWindow',
   components: {
     EmpCard,
   },
-  props: {
-    page: Number,
-  },
   data() {
     return {
       pos_id: '',
       dept_id: '',
       emps: {},
+      pages: 1,
+    };
+  },
+  async mounted() {
+    const store = useStore();
+    this.emps = await store.getters['emps/getEmps'];
+    this.pages = await store.getters['emps/getPageAmount'];
+    return {
     };
   },
   setup() {
     const store = useStore();
     return {
-      change_page: (() => store.commit('emps/LIST_PAGE')),
-    };
-  },
-  async mounted() {
-    const token = await auth.getToken();
-    const res = await fetch('https://test.atwinta.online/api/v1/workers?page=' + this.page, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
-      },
-    });
-    const empList = await res.json();
-    console.log(await empList);
-    this.emps = await empList.data;
-    console.log(await this.emps);
-    return {
+      setPage: (page) => store.commit('emps/SET_PAGE', page),
+      page: computed(() => store.getters['emps/getPage']),
     };
   },
 };
 </script>
 
 <style lang="sass" scoped>
+@use './style/_textpresets'
 .test
   width: 20px
   height: 20px
@@ -69,4 +57,12 @@ export default {
   flex-direction: row
   width: 1060px
   margin: 100px auto
+.page-list
+  margin: 60px 0
+.page-number
+  margin: 10px 5px
+.page-number-text
+  @extend %maintypo
+  @extend %h2semibold
+  color: black
 </style>
