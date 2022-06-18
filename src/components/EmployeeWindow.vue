@@ -1,51 +1,76 @@
 <template lang="pug">
-.employee
-  .employee__name {{ name }}
-  .employee__image
-    img(:src='image')
-  .employee__data-line
-    .employee__data-line_title Логин:
-    .employee__data-line_data {{ login }}
-  .employee__data-line
-    .employee__data-line_title Email:
-    .employee__data-line_data {{ email }}
-  .employee__data-line
-    .employee__data-line_title Должность:
-    .employee__data-line_data {{ jobTitle }}
-  .employee__data-line
-    .employee__data-line_title Отдел:
-    .employee__data-line_data {{ department_id }}
-  .employee__data-line
-    .employee__data-line_title Зачислен:
-    .employee__data-line_data {{ startDate }}
-  .employee__data-line
-    .employee__data-line_title О себе:
-    .employee__data-line_data {{ about }}
+div(v-if='employee !== undefined')
+  .employee
+    .table-container
+      table
+        tr
+          td
+            .employee__image
+              img(:src='employee.image' width='375' height='375')
+          td
+            .data-container
+              .employee__name {{ employee.name }}
+              .employee__data-line
+                .employee__data-line_title Логин:
+                .employee__data-line_data {{ employee.login }}
+              .employee__data-line
+                .employee__data-line_title Email:
+                .employee__data-line_data {{ employee.email }}
+              .employee__data-line
+                .employee__data-line_title Должность:
+                .employee__data-line_data {{ employee.worker.position }}
+              .employee__data-line
+                .employee__data-line_title Отдел:
+                .employee__data-line_data {{ employee.worker.department }}
+              .employee__data-line
+                .employee__data-line_title Зачислен:
+                .employee__data-line_data {{ employee.worker.adopted_at }}
+              .employee__data-line
+                .employee__data-line_title О себе:
+                .employee__data-line_data {{ employee.about }}
 </template>
 
 <script>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
 
 export default {
   name: 'EmployeeWindow',
   setup() {
     const store = useStore();
+    const route = useRoute();
+    store.commit('employee/PULL_EMPLOYEE', route.params.id);
     return {
-      name: computed(() => store.getters['employee/getName']),
-      image: computed(() => store.getters['employee/getImage']),
-      login: computed(() => store.getters['employee/getLogin']),
-      email: computed(() => store.getters['employee/getEmail']),
-      jobTitle: computed(() => store.getters['employee/getJobTitle']),
-      department_id: computed(() => store.getters['employee/getDepartmentId']),
-      startDate: computed(() => store.getters['employee/getStartDate']),
-      about: computed(() => store.getters['employee/getAbout']),
+      employee: computed(() => store.getters['employee/getEmployee']),
     };
   },
 };
 </script>
 
 <style lang="sass" scoped>
+@use './style/_textpresets'
 .employee
   margin: 100px auto
+  width: 1000px
+  &__name
+    @extend %maintypo
+    @extend %h1semibold
+    margin-bottom: 15px
+  &__image
+    margin-right: 50px
+  &__data-line
+    margin: 5px 0
+    &_title
+      @extend %maintypo
+      @extend %h2semibold
+    &_data
+      @extend %maintypo
+      @extend %text-normal
+.table-container
+  margin-top: 30px
+.data-container
+  border-left: 3px solid
+  padding-left: 20px
+  min-height: 300px
 </style>

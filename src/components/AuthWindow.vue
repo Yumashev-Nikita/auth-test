@@ -83,10 +83,9 @@ export default {
 @use './style/textstyles'
 
 .auth-window
-  margin: 200px auto
+  margin: 100px auto
   padding: 50px
   width: 500px
-  border: 2px solid black
   border-radius: 15px
   display: flex
   flex-direction: column

@@ -28,7 +28,6 @@ export default {
         Authorization: `Bearer ${await auth.getToken()}`,
       },
     }).then((response) => {
-      console.log(response.data);
       employee = response.data;
     }).catch((error) => {
       console.log('ERROR: GET_employeeS', error);

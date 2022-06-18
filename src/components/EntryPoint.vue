@@ -26,8 +26,9 @@ export default {
   &__block-container
     display: flex
     flex-direction: row
+    width: 450px
     height: 100%
-    margin-left: 20px
+    margin: auto
     align-items: center
   &__block
     display: flex
