@@ -3,16 +3,12 @@ import dept from '@/api/department';
 export default {
   namespaced: true,
   state: {
-    dept: 0,
-    pos: 0,
     page: 1,
-    pages: 0,
     employees: {},
   },
   getters: {
     getEmployees: (state) => state.employees.data,
     getPageAmount: (state) => state.employees.last_page,
-    getPage: (state) => state.employees.current_page,
   },
   mutations: {
     LIST_PAGE_FORWARD: (state) => { state.page += 1; },
@@ -25,24 +21,10 @@ export default {
     },
   },
   actions: {
-    preFetchEmployees: {
-      root: true,
-      async handler(namespacedContext) {
-        await namespacedContext.commit('PULL_EMPLOYEES');
-      },
-    },
-    preFetchPages: {
-      root: true,
-      async handler(namespacedContext) {
-        await namespacedContext.commit('PULL_PAGES');
-      },
-    },
-    setPage: {
-      root: true,
-      async handler(namespacedContext, page) {
-        namespacedContext.commit('SET_PAGE', page);
-        await namespacedContext.commit('PULL_EMPLOYEES');
-      },
+    preFetchEmployees: async (context) => { await context.commit('PULL_EMPLOYEES'); },
+    setPage: async (context, page) => {
+      context.commit('SET_PAGE', page);
+      await context.commit('PULL_EMPLOYEES');
     },
   },
   modules: {

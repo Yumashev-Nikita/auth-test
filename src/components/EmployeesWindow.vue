@@ -22,12 +22,11 @@ export default {
   },
   setup() {
     const store = useStore();
-    store.dispatch('preFetchEmployees');
-    store.dispatch('preFetchPages');
+    store.dispatch('employees/preFetchEmployees');
     return {
-      setPage: (page) => store.dispatch('setPage', page),
-      emps: computed(() => store.state.employees.employees),
-      pages: computed(() => store.state.employees.pages),
+      setPage: (page) => store.dispatch('employees/setPage', page),
+      emps: computed(() => store.getters['employees/getEmployees']),
+      pages: computed(() => store.getters['employees/getPageAmount']),
     };
   },
 };

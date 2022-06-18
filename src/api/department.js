@@ -6,7 +6,6 @@ const axios = require('axios').default;
 export default {
   async getEmployees(page) {
     let employeesData;
-    console.log('getEmps');
     await axios({
       method: 'GET',
       url: `${baseURL}/workers?page=${page}`,
@@ -14,8 +13,8 @@ export default {
         Authorization: `Bearer ${await auth.getToken()}`,
       },
     }).then((response) => {
-      console.log('employees: ', response.data);
-      employeesData = response.data.data;
+      employeesData = response.data;
+      console.log(employeesData);
     }).catch((error) => {
       console.log('ERROR: GET_employeeS', error);
     });
