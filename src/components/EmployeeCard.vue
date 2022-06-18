@@ -2,16 +2,26 @@
 .emp
   img(:src='image')
   span() {{ name }}
-  router-link(to='/employee') Открыть профиль
+  router-link(:to="{ name: 'employee', params: { id: id }}" @click='setEmployeeId') Открыть профиль
 </template>
 
 <script>
+import { useStore } from 'vuex';
+
 export default {
   name: 'EmpCard',
   props: {
     image: String,
     name: String,
     id: Number,
+  },
+  setup(props) {
+    const store = useStore();
+    return {
+      setEmployeeId: () => {
+        store.dispatch('employee/setId', props.id);
+      },
+    };
   },
 };
 </script>

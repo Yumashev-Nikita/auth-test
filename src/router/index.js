@@ -8,7 +8,11 @@ const routes = [
   { path: '/profile', component: ProfileWindow },
   { path: '/employees', component: EmployeesWindow },
   { path: '/auth', component: AuthWindow },
-  { path: '/employee', component: EmployeeWindow },
+  {
+    path: '/employee/:id',
+    name: 'employee',
+    component: EmployeeWindow,
+  },
 ];
 
 const router = createRouter({

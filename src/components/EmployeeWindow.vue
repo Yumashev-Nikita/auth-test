@@ -1,7 +1,8 @@
 <template lang="pug">
 .employee
   .employee__name {{ name }}
-  .employee__image img(:src='image')
+  .employee__image
+    img(:src='image')
   .employee__data-line
     .employee__data-line_title Логин:
     .employee__data-line_data {{ login }}
@@ -23,20 +24,28 @@
 </template>
 
 <script>
-// import { computed } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
   name: 'EmployeeWindow',
   setup() {
     const store = useStore();
-    store.dispatch('preFetchEmployees');
     return {
-
+      name: computed(() => store.getters['employee/getName']),
+      image: computed(() => store.getters['employee/getImage']),
+      login: computed(() => store.getters['employee/getLogin']),
+      email: computed(() => store.getters['employee/getEmail']),
+      jobTitle: computed(() => store.getters['employee/getJobTitle']),
+      department_id: computed(() => store.getters['employee/getDepartmentId']),
+      startDate: computed(() => store.getters['employee/getStartDate']),
+      about: computed(() => store.getters['employee/getAbout']),
     };
   },
 };
 </script>
 
 <style lang="sass" scoped>
+.employee
+  margin: 100px auto
 </style>

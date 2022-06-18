@@ -1,13 +1,14 @@
 <template lang="pug">
-.emps-window-container
+.employees-window-container
   .page-list
     span(class='arrow') &lt
     span(v-for='page in pages' :key='page'
     class='page-number page-number-text'
     @click='setPage(page)') {{ page }}
     span(class='arrow') >
-  .emps
-    EmployeeCard(v-for='emp in emps' :key='emp.id' :image='emp.image' :name='emp.name' :id='emp.id')
+  .employees
+    EmployeeCard(v-for='employee in employees' :key='employee.id'
+    :image='employee.image' :name='employee.name' :id='employee.id')
 </template>
 
 <script>
@@ -16,7 +17,7 @@ import { useStore } from 'vuex';
 import EmployeeCard from './EmployeeCard.vue';
 
 export default {
-  name: 'EmpsWindow',
+  name: 'EmployeesWindow',
   components: {
     EmployeeCard,
   },
@@ -25,7 +26,7 @@ export default {
     store.dispatch('employees/preFetchEmployees');
     return {
       setPage: (page) => store.dispatch('employees/setPage', page),
-      emps: computed(() => store.getters['employees/getEmployees']),
+      employees: computed(() => store.getters['employees/getEmployees']),
       pages: computed(() => store.getters['employees/getPageAmount']),
     };
   },
@@ -34,10 +35,10 @@ export default {
 
 <style lang="sass" scoped>
 @use './style/_textpresets'
-.emps-window-container
+.employees-window-container
   width: 1060px
   margin: 100px auto
-.emps
+.employees
   display: flex
   flex-wrap: wrap
   flex-direction: row

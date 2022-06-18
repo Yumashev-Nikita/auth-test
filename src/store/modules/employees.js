@@ -15,10 +15,7 @@ export default {
     LIST_PAGE_BACKWARD: (state) => { state.page -= 1; },
     PULL_EMPLOYEES: async (state) => { state.employees = await dept.getEmployees(state.page); },
     PULL_PAGES: async (state) => { state.pages = await dept.getPageAmount(); },
-    SET_PAGE: (state, page) => {
-      console.log(state.page, '->', page);
-      state.page = page;
-    },
+    SET_PAGE: (state, page) => { state.page = page; },
   },
   actions: {
     preFetchEmployees: async (context) => { await context.commit('PULL_EMPLOYEES'); },
