@@ -1,14 +1,15 @@
 <template lang="pug">
-.employees-window-container
-  .page-list
-    span(class='arrow') &lt
-    span(v-for='page in pages' :key='page'
-    class='page-number page-number-text'
-    @click='setPage(page)') {{ page }}
-    span(class='arrow') >
-  .employees
-    EmployeeCard(v-for='employee in employees' :key='employee.id'
-    :image='employee.image' :name='employee.name' :id='employee.id')
+div(v-if='authStatus')
+  .employees-window-container
+    .page-list
+      span(class='arrow') &lt
+      span(v-for='page in pages' :key='page'
+      class='page-number page-number-text'
+      @click='setPage(page)') {{ page }}
+      span(class='arrow') >
+    .employees
+      EmployeeCard(v-for='employee in employees' :key='employee.id'
+      :image='employee.image' :name='employee.name' :id='employee.id')
 </template>
 
 <script>
@@ -23,11 +24,12 @@ export default {
   },
   setup() {
     const store = useStore();
-    store.dispatch('employees/preFetchEmployees');
+    store.commit('employees/PULL_EMPLOYEES');
     return {
       setPage: (page) => store.dispatch('employees/setPage', page),
       employees: computed(() => store.getters['employees/getEmployees']),
       pages: computed(() => store.getters['employees/getPageAmount']),
+      authStatus: computed(() => store.getters['auth/getAuthStatus']),
     };
   },
 };

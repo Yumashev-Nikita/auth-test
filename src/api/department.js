@@ -1,4 +1,3 @@
-import auth from './auth';
 import baseURL from './base-vars';
 
 const axios = require('axios').default;
@@ -10,7 +9,7 @@ export default {
       method: 'GET',
       url: `${baseURL}/workers?page=${page}`,
       headers: {
-        Authorization: `Bearer ${await auth.getToken()}`,
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
       },
     }).then((response) => {
       employeesData = response.data;
@@ -25,7 +24,7 @@ export default {
       method: 'GET',
       url: `${baseURL}/workers/${id}`,
       headers: {
-        Authorization: `Bearer ${await auth.getToken()}`,
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
       },
     }).then((response) => {
       employee = response.data;

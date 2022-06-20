@@ -20,10 +20,9 @@ export default {
 .emp
   width: 300px
   height: 430px
-  border-radius: 10px
   margin: 15px 5px
   padding: 20px
-  box-shadow: 0px 0px 10px #c4c4c4
   display: flex
   flex-direction: column
+  border-left: 2px solid
 </style>

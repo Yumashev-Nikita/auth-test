@@ -1,16 +1,30 @@
 <template lang='pug'>
 .top-nav-bar
   .top-nav-bar__block-container
-    router-link(to='/profile' class='top-nav-bar__block nav-bar-block-text rl-ns') Профиль
     router-link(to='/employees' class='top-nav-bar__block nav-bar-block-text rl-ns') Сотрудники
-    router-link(to='/auth' class='top-nav-bar__block nav-bar-block-text rl-ns') Авторизация
+    router-link(v-if='!authStatus' to='/auth'
+    class='top-nav-bar__block nav-bar-block-text rl-ns') Авторизация
+    router-link(v-if='authStatus && profile !== undefined' to='/profile'
+    class='top-nav-bar__block nav-bar-block-text rl-ns') {{ profile.name }}
 <router-view></router-view>
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
   name: 'EntryPoint',
+  setup() {
+    const store = useStore();
+    if (localStorage.getItem('authToken')) {
+      store.commit('auth/PULL_PROFILE');
+    }
+    return {
+      authStatus: computed(() => store.getters['auth/getAuthStatus']),
+      profile: computed(() => store.state.auth.profile),
+    };
+  },
 };
 </script>
 
@@ -26,9 +40,8 @@ export default {
   &__block-container
     display: flex
     flex-direction: row
-    width: 450px
+    justify-content: center
     height: 100%
-    margin: auto
     align-items: center
   &__block
     display: flex

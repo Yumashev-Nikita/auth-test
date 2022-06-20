@@ -51,7 +51,7 @@ export default {
 <style lang="sass" scoped>
 @use './style/_textpresets'
 .employee
-  margin: 100px auto
+  margin: 190px auto
   width: 1000px
   &__name
     @extend %maintypo
