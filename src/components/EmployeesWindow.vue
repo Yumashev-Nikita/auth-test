@@ -45,7 +45,7 @@ export default {
   flex-wrap: wrap
   flex-direction: row
 .page-list
-  margin: 60px 0
+  margin-top: 100px
 .page-number
   margin: 10px 5px
 .page-number-text

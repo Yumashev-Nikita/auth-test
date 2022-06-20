@@ -11,10 +11,7 @@ export default {
       headers: {
         'Content-Type': 'application/json',
       },
-      data: {
-        email: payload.email,
-        password: payload.password,
-      },
+      data: payload,
     }).then((response) => {
       localStorage.setItem('authToken', response.data.token);
       code = true;
@@ -23,5 +20,21 @@ export default {
       code = false;
     });
     return code;
+  },
+  async getRestoreToken() {
+    await axios({
+      method: 'POST',
+      url: `${baseURL}/auth/restore`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        email: 'libradrago79@gmail.com',
+      },
+    }).then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      console.log('ERROR: GET_TOKEN', error);
+    });
   },
 };

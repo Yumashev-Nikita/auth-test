@@ -1,11 +1,14 @@
 <template lang='pug'>
 .top-nav-bar
   .top-nav-bar__block-container
-    router-link(to='/employees' class='top-nav-bar__block nav-bar-block-text rl-ns') Сотрудники
-    router-link(v-if='!authStatus' to='/auth'
-    class='top-nav-bar__block nav-bar-block-text rl-ns') Авторизация
-    router-link(v-if='authStatus && profile !== undefined' to='/profile'
-    class='top-nav-bar__block nav-bar-block-text rl-ns') {{ profile.name }}
+    router-link(to='/employees'
+    class='top-nav-bar__block nav-bar-block-text rl-ns') Сотрудники
+    div(v-if='!authStatus && profile === undefined')
+      router-link(to='/auth'
+      class='top-nav-bar__block nav-bar-block-text rl-ns') Авторизация
+    div(v-if='profile !== undefined')
+      router-link(to='/profile'
+      class='top-nav-bar__block nav-bar-block-text rl-ns') {{ profile.name }}
 <router-view></router-view>
 </template>
 
